@@ -11,7 +11,7 @@
     "publish": null,
     "directories": {
       "buildResources": "build",
-      "output": "dist"
+      "output": "build"
     },
     "files": [
       "**/*",
