@@ -35,7 +35,8 @@
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "shortcutName": "Notes"
-    }
+    },
+    "publish": null
   },
   "files": [
     "dist/",
