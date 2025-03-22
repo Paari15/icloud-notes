@@ -1,38 +1,34 @@
-name: Build Windows App
+name: Build and Package
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Check out the code
+        uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install Dependencies
+        run: npm install
 
-    - name: Build
-      run: npm run build
+      - name: Build the App
+        run: npm run build
 
-    - name: Package
-      run: npm run package
-
-    - name: Sign Application
-      if: env.GH_TOKEN != ''
-      run: |
-        # Add your signing command here
-        signtool sign /fd SHA256 /a /tr http://timestamp.digicert.com /td SHA256 dist\iCloud Notes Setup 1.0.0.exe
-      env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-
-    - name: Upload Artifact
-      run: |
-        # Upload your artifact here
-        echo "Uploading artifact..."
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: notes-app
+          path: build/
