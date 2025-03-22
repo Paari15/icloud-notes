@@ -1,12 +1,18 @@
+# GitHub Action YAML
 name: Build and Package
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      appName:
+        description: 'Enter the App Name'
+        required: true
+      appURL:
+        description: 'Enter the Web Link'
+        required: true
+      appIcon:
+        description: 'Enter the App Icon File Link'
+        required: true
 
 jobs:
   build:
@@ -21,13 +27,17 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Download App Icon
+        run: curl -L "${{ github.event.inputs.appIcon }}" -o icon.ico
+
       - name: Install Dependencies
         run: npm install
 
-      - name: Configure the App
-        run: npm run configure
-
       - name: Build the App
+        env:
+          APP_NAME: ${{ github.event.inputs.appName }}
+          APP_URL: ${{ github.event.inputs.appURL }}
+          APP_ICON: icon.ico
         run: npm run build
 
       - name: Upload Artifacts
