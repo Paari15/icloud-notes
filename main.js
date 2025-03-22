@@ -7,8 +7,8 @@ function createWindow() {
         height: 600,
         title: 'Notes',
         icon: path.join(__dirname, 'icon.ico'),
-        transparent: true,
-        frame: false,
+        transparent: false,
+        frame: true,
         alwaysOnTop: false,
         resizable: true,
         webPreferences: {
@@ -18,23 +18,17 @@ function createWindow() {
             enableRemoteModule: false,
             spellcheck: false,
             devTools: false,
-            backgroundThrottling: false,
+            backgroundThrottling: true,
             webSecurity: true,
-            hardwareAcceleration: true,
+            hardwareAcceleration: false,
         },
     });
 
     win.loadURL('https://www.icloud.com/notes/');
     win.setMenuBarVisibility(false);
 
-    // Close the app properly when the window is closed
+    // Properly handle the window close to kill the app
     win.on('closed', () => {
-        app.quit();
-    });
-
-    // Handle close button to properly quit the app
-    win.on('close', (event) => {
-        event.preventDefault();
         app.quit();
     });
 }
@@ -42,9 +36,7 @@ function createWindow() {
 app.on('ready', createWindow);
 
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
+    app.quit(); // Kill the entire app when all windows are closed
 });
 
 app.on('activate', () => {
