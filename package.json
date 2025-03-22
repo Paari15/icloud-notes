@@ -1,3 +1,4 @@
+// package.json
 {
   "name": "notes",
   "version": "1.0.0",
@@ -31,9 +32,8 @@
     }
   },
   "scripts": {
-    "configure": "node configure.js",
     "start": "electron .",
-    "build": "npm run configure && electron-builder"
+    "build": "electron-builder"
   },
   "devDependencies": {
     "electron": "^25.1.8",
