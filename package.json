@@ -8,6 +8,7 @@
   "build": {
     "appId": "com.pauri.notes",
     "productName": "Notes",
+    "publish": null,
     "directories": {
       "buildResources": "build",
       "output": "dist"
@@ -34,7 +35,7 @@
     "build": "electron-builder"
   },
   "devDependencies": {
-    "electron-builder": "^25.1.8",
-    "electron": "^25.1.8"
+    "electron": "^25.1.8",
+    "electron-builder": "^25.1.8"
   }
 }
