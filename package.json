@@ -1,6 +1,8 @@
 {
   "name": "icloud-notes",
   "version": "1.0.0",
+  "description": "A simple Electron app to access iCloud Notes.",
+  "author": "Paari",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -16,10 +18,22 @@
     "productName": "iCloud Notes",
     "files": [
       "**/*"
-    ]
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": false,
+      "deleteAppDataOnUninstall": true
+    }
   },
   "files": [
     "dist/",
-    "node_modules/"
+    "node_modules/",
+    "main.js",
+    "icon.ico"
   ]
 }
