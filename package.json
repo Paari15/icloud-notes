@@ -1,47 +1,42 @@
 {
   "name": "notes",
   "version": "1.0.0",
-  "description": "A simple Electron app to access Notes.",
-  "author": "Pauri",
+  "description": "A lightweight, battery-optimized Electron-based iCloud Notes launcher.",
   "main": "main.js",
-  "scripts": {
-    "start": "electron .",
-    "build": "electron-builder",
-    "package": "electron-builder --windows"
-  },
-  "devDependencies": {
-    "electron": "^25.3.1",
-    "electron-builder": "^25.1.8"
-  },
+  "author": "Pauri",
+  "license": "MIT",
   "build": {
-    "appId": "com.notes.app",
+    "appId": "com.pauri.notes",
     "productName": "Notes",
-    "publisherName": "Pauri",
-    "files": [
-      "**/*"
-    ],
     "directories": {
-      "output": "build"
+      "buildResources": "build",
+      "output": "dist"
     },
+    "files": [
+      "**/*",
+      "!node_modules/**/*",
+      "!dist"
+    ],
     "win": {
-      "target": "nsis",
       "icon": "icon.ico",
-      "artifactName": "${productName}-setup-${version}.exe"
+      "target": "nsis"
     },
     "nsis": {
       "oneClick": true,
       "perMachine": false,
       "allowToChangeInstallationDirectory": false,
-      "deleteAppDataOnUninstall": true,
       "createDesktopShortcut": true,
-      "createStartMenuShortcut": true,
-      "shortcutName": "Notes"
+      "createStartMenuShortcut": true
     }
   },
-  "files": [
-    "dist/",
-    "node_modules/",
-    "main.js",
-    "icon.ico"
-  ]
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "dependencies": {
+    "electron": "^25.1.8"
+  },
+  "devDependencies": {
+    "electron-builder": "^25.1.8"
+  }
 }
