@@ -1,7 +1,7 @@
 {
-  "name": "icloud-notes",
+  "name": "notes",
   "version": "1.0.0",
-  "description": "A simple Electron app to access iCloud Notes.",
+  "description": "A simple Electron app to access Notes.",
   "author": "Paari",
   "main": "main.js",
   "scripts": {
@@ -14,20 +14,27 @@
     "electron-builder": "^25.1.8"
   },
   "build": {
-    "appId": "com.icloud.notes",
-    "productName": "iCloud Notes",
+    "appId": "com.notes.app",
+    "productName": "Notes",
     "files": [
       "**/*"
     ],
+    "directories": {
+      "output": "build"
+    },
     "win": {
       "target": "nsis",
-      "icon": "icon.ico"
+      "icon": "icon.ico",
+      "artifactName": "${productName}-setup-${version}.exe"
     },
     "nsis": {
       "oneClick": true,
       "perMachine": false,
       "allowToChangeInstallationDirectory": false,
-      "deleteAppDataOnUninstall": true
+      "deleteAppDataOnUninstall": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Notes"
     }
   },
   "files": [
