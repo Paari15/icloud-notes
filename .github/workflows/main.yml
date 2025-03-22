@@ -17,36 +17,36 @@ jobs:
       - name: Check out the code
         uses: actions/checkout@v3
 
-      # Step 2: Set up .NET
-      - name: Set up .NET
-        uses: actions/setup-dotnet@v3
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          dotnet-version: '7.x'
+          node-version: '20.x' # Adjust to your Node.js version
 
-      # Step 3: Restore dependencies with correct path
+      # Step 3: Install dependencies using npm
       - name: Install dependencies
-        run: dotnet restore ./YourProjectFolder/YourProject.sln
+        run: npm install
 
-      # Step 4: Build the app
+      # Step 4: Build the app (assuming you have a build script in package.json)
       - name: Build the app
-        run: dotnet build ./YourProjectFolder/YourProject.sln --configuration Release
+        run: npm run build
 
-      # Step 5: Publish the app
-      - name: Publish the app
-        run: dotnet publish ./YourProjectFolder/YourProject.sln -c Release -o ./publish
+      # Step 5: Package the app (assuming you use something like electron-builder)
+      - name: Package the app
+        run: npm run package
 
       # Step 6: Upload Release to GitHub
       - name: Upload Release to GitHub
         uses: actions/upload-artifact@v4
         with:
           name: iCloudNotes
-          path: ./publish
+          path: ./dist # Change this if your build output is elsewhere
 
       # Step 7: Create a Release
       - name: Create a Release
         uses: softprops/action-gh-release@v1
         with:
-          files: ./publish/**
+          files: ./dist/**
           tag_name: v1.0.0
           release_name: "iCloudNotes v1.0.0"
           draft: false
