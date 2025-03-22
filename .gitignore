@@ -1,0 +1,14 @@
+# Ignore build output
+dist/
+out/
+
+# Ignore dependencies
+node_modules/
+
+# Ignore logs
+*.log
+
+# Ignore temporary files
+*.tmp
+*.lock
+.DS_Store
