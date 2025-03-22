@@ -1,7 +1,7 @@
 {
   "name": "notes",
   "version": "1.0.0",
-  "description": "A lightweight, battery-optimized Electron-based iCloud Notes launcher.",
+  "description": "A lightweight, battery-optimized Electron-based launcher.",
   "main": "main.js",
   "author": "Pauri",
   "license": "MIT",
@@ -31,8 +31,9 @@
     }
   },
   "scripts": {
+    "configure": "node configure.js",
     "start": "electron .",
-    "build": "electron-builder"
+    "build": "npm run configure && electron-builder"
   },
   "devDependencies": {
     "electron": "^25.1.8",
