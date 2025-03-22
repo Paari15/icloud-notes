@@ -1,22 +1,13 @@
+// main.js
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
-const fs = require('fs');
 
-// Check if config exists, otherwise set default URL
-const configPath = path.join(__dirname, 'config.json');
-let url = 'https://www.icloud.com/notes/';
-
-if (fs.existsSync(configPath)) {
-    const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-    url = config.url || url;
-}
-
-function createWindow() {
+function createWindow(appName, appURL, appIcon) {
     const win = new BrowserWindow({
         width: 800,
         height: 600,
-        title: 'Notes',
-        icon: path.join(__dirname, 'icon.ico'),
+        title: appName,
+        icon: path.join(__dirname, appIcon),
         transparent: false,
         frame: true,
         alwaysOnTop: false,
@@ -34,19 +25,23 @@ function createWindow() {
         },
     });
 
-    win.loadURL(url);
+    win.loadURL(appURL);
     win.setMenuBarVisibility(false);
 
-    // Properly handle the window close to kill the app
     win.on('closed', () => {
         app.quit();
     });
 }
 
-app.on('ready', createWindow);
+app.on('ready', () => {
+    const appName = process.env.APP_NAME || 'Notes';
+    const appURL = process.env.APP_URL || 'https://www.icloud.com/notes/';
+    const appIcon = process.env.APP_ICON || 'icon.ico';
+    createWindow(appName, appURL, appIcon);
+});
 
 app.on('window-all-closed', () => {
-    app.quit(); // Kill the entire app when all windows are closed
+    app.quit();
 });
 
 app.on('activate', () => {
