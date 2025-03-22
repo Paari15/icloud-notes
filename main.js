@@ -1,5 +1,15 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
+const fs = require('fs');
+
+// Check if config exists, otherwise set default URL
+const configPath = path.join(__dirname, 'config.json');
+let url = 'https://www.icloud.com/notes/';
+
+if (fs.existsSync(configPath)) {
+    const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+    url = config.url || url;
+}
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -24,7 +34,7 @@ function createWindow() {
         },
     });
 
-    win.loadURL('https://www.icloud.com/notes/');
+    win.loadURL(url);
     win.setMenuBarVisibility(false);
 
     // Properly handle the window close to kill the app
