@@ -14,7 +14,7 @@ A simple and lightweight Electron app to access Apple Notes on Windows.
 ---
 
 ### 🛠️ Installation
-1. **Download** the latest version of Notes from the [Releases](https://github.com/yourusername/notes/releases) page.
+1. **Download** the latest version of Notes from the [Releases](https://github.com/paari15/icloud-notes/releases) page.
 2. **Run the installer** and follow the instructions.
 3. **Launch the app** from the Start menu or desktop shortcut.
 
