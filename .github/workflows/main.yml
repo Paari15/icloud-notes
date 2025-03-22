@@ -1,0 +1,40 @@
+name: Build and Release iCloud Notes
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v3
+
+      - name: Set up Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '14.2'
+
+      - name: Install dependencies
+        run: swift package resolve
+
+      - name: Build the app
+        run: xcodebuild -scheme "iCloudNotes" -destination "generic/platform=iOS" clean build
+
+      - name: Archive the app
+        run: xcodebuild -scheme "iCloudNotes" -archivePath build/Release.xcarchive archive
+
+      - name: Export IPA
+        run: xcodebuild -exportArchive -archivePath build/Release.xcarchive -exportPath build/ -exportOptionsPlist ExportOptions.plist
+
+      - name: Upload Release to GitHub
+        uses: actions/upload-artifact@v3
+        with:
+          name: iCloudNotes
+          path: build/*.ipa
