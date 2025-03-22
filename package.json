@@ -2,7 +2,7 @@
   "name": "notes",
   "version": "1.0.0",
   "description": "A simple Electron app to access Notes.",
-  "author": "Paari",
+  "author": "Pauri",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -16,6 +16,7 @@
   "build": {
     "appId": "com.notes.app",
     "productName": "Notes",
+    "publisherName": "Pauri",
     "files": [
       "**/*"
     ],
@@ -35,8 +36,7 @@
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "shortcutName": "Notes"
-    },
-    "publish": null
+    }
   },
   "files": [
     "dist/",
